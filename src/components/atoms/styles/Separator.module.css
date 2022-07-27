@@ -1,0 +1,28 @@
+.style__separator {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--text-gray);
+}
+
+.line {
+      width: 120px;
+      height: 1px;
+      background-color: var(--text-gray);
+}
+  
+.title {
+      font-family: 'Rubik', sans-serif;
+      font-weight: 400;
+      font-size: 16px;
+      color: var(--text-gray);
+} 
+    @media screen and (max-width: 576px) {
+        .line {
+            display: none;
+        }
+
+        .title {
+           width: 100%; 
+        }
+    }

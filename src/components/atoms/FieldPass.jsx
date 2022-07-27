@@ -1,5 +1,5 @@
 import React from "react";
-import ropTypes from "prop-types";
+import propTypes from "prop-types";
 import IconButton from "@mui/icons-material";
 import { Input, InputAdornment, InputLabel, FormControl } from "@mui/material"
 import { Visibility } from "@mui/icons-material";

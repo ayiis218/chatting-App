@@ -1,8 +1,9 @@
 import React from 'react';
 import propTypes from 'prop-types';
 import styles from './styles/Button.module.css';
+import { Button } from 'react-bootstrap';
 
-const Button = ({ children, isPrimary, isOutline, type, icon, disabled }) => {
+const ButtonIcon = ({ children, isPrimary, isOutline, type, icon, disabled }) => {
   const icons = {
     google: (
       <svg
@@ -21,9 +22,9 @@ const Button = ({ children, isPrimary, isOutline, type, icon, disabled }) => {
 
   if (isPrimary) {
     return (
-      <button className={styles.Button.primary} type={type} disabled={disabled}>
+      <Button className={styles.Button.primary} type={type} disabled={disabled}>
         {children}
-      </button>
+      </Button>
     );
   }
 
@@ -37,7 +38,7 @@ const Button = ({ children, isPrimary, isOutline, type, icon, disabled }) => {
   }
 };
 
-Button.propTypes = {
+ButtonIcon.propTypes = {
   type: propTypes.string,
   icon: propTypes.string,
   isPrimary: propTypes.bool,
@@ -45,4 +46,4 @@ Button.propTypes = {
   isLoading: propTypes.bool
 };
 
-export default Button;
+export default ButtonIcon;
