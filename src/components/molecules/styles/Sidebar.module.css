@@ -24,8 +24,8 @@
     color: var(--text-purple);
 }
   
-.toggler {
-}
+/* .toggler {
+} */
 
 .toggler:hover {
     opacity: 0.5;

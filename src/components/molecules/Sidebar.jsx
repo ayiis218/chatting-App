@@ -1,9 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate, useSearchParams, Link } from 'react-router-dom';
-import { SearchInput, MessageCard } from '../../../components';
+import React, { useState } from 'react';
+import { useNavigate, useSearchParams, Link, Form, Image } from 'react-router-dom';
 import { BulletList } from 'react-content-loader';
-import { useSelector, useDispatch } from 'react-redux';
-import { getListUser } from '../../../redux/actions/user';
+// import { useSelector, useDispatch } from 'react-redux';
+// import { getListUser } from '../../../redux/actions/user';
+
+import Message from '../molecules/Message'
+import Search from '../atoms/Search'
+
 import {
   IconSetting,
   IconUser,
@@ -13,12 +16,12 @@ import {
   IconQuestion,
   IconLogout
 } from '../../../assets/icons';
-import './index.scss';
+import styles from './styles/Sidebar.module.css';
 
 const index = ({ decoded, selectReceiver }) => {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { listUser } = useSelector((state) => state);
+  // const dispatch = useDispatch();
+  // const { listUser } = useSelector((state) => state);
   // const [search, setSearch] = useState('');
   const [queryParams] = useSearchParams();
   const [searchQuery, setSearchQuery] = useState('');
@@ -26,7 +29,7 @@ const index = ({ decoded, selectReceiver }) => {
   const [navbarPopup, setNavbarPopup] = useState(false);
   // const [queryParams] = useSearchParams();
 
-  useEffect(() => {
+  /* useEffect(() => {
     let url = 'user?';
     setSearchQuery('');
     if (queryParams.get('search')) {
@@ -37,10 +40,10 @@ const index = ({ decoded, selectReceiver }) => {
     if (queryParams.get('limit')) {
       setLimitQuery(queryParams.get('limit'));
       url += `&limit=${queryParams.get('limit')}`;
-    }
+    } */
 
-    dispatch(getListUser(navigate, url));
-  }, [dispatch, navigate, queryParams]);
+    /* dispatch(getListUser(navigate, url));
+  }, [dispatch, navigate, queryParams]); */
 
   const applyFilter = () => {
     let url = '/?';
@@ -65,11 +68,11 @@ const index = ({ decoded, selectReceiver }) => {
   };
 
   return (
-    <div className="style__sidebar">
-      <div className="style__sidebar--header">
-        <h1 className="style__sidebar--logo">Telegram</h1>
+    <div className={styles.sidebar}>
+      <div className={styles.header}>
+        <h1 className={styles.logo}>Telegram</h1>
         <svg
-          className="style__sidebar--toggler"
+          className={styles.toggler}
           width="34"
           height="34"
           viewBox="0 0 34 34"
@@ -83,51 +86,51 @@ const index = ({ decoded, selectReceiver }) => {
           <rect x="6" y="23.4" width="22" height="3.3" rx="1.65" fill="#7E98DF" />
         </svg>
         {navbarPopup && (
-          <div className="nav__popup">
+          <div className={styles.popup}>
             <Link to="?tab=settings" style={{ textDecoration: 'none' }}>
-              <div className="nav__popup--row">
-                <img src={IconSetting} alt="Setting" />
+              <div className={styles.row}>
+                <Image src={IconSetting} alt="Setting" />
                 <p>Settings</p>
               </div>
             </Link>
-            <div className="nav__popup--row">
-              <img src={IconUser} alt="Contacts" />
+            <div className={styles.row}>
+              <Image src={IconUser} alt="Contacts" />
               <p>Contacts</p>
             </div>
-            <div className="nav__popup--row">
-              <img src={IconPhone} alt="Calls" />
+            <div className={styles.row}>
+              <Image src={IconPhone} alt="Calls" />
               <p>Calls</p>
             </div>
-            <div className="nav__popup--row">
-              <img src={IconBookmark} alt="Save Messages" />
+            <div className={styles.row}>
+              <Image src={IconBookmark} alt="Save Messages" />
               <p>Save Messages</p>
             </div>
-            <div className="nav__popup--row">
-              <img src={IconAddUser} alt="Invite Friends" />
+            <div className={styles.row}>
+              <Image src={IconAddUser} alt="Invite Friends" />
               <p>Invite Friend</p>
             </div>
-            <div className="nav__popup--row">
-              <img src={IconQuestion} alt="Telegram FAQ" />
+            <div className={styles.row}>
+              <Image src={IconQuestion} alt="Telegram FAQ" />
               <p>Telegram FAQ</p>
             </div>
-            <div className="nav__popup--row" onClick={logout}>
-              <img src={IconLogout} alt="Logout" />
+            <div className={styles.row} onClick={logout}>
+              <Image src={IconLogout} alt="Logout" />
               <p>Logout</p>
             </div>
           </div>
         )}
       </div>
-      <div className="style__sidebar--action">
-        <form onSubmit={handleSearch}>
-          <SearchInput
+      <div className={styles.action}>
+        <Form onSubmit={handleSearch}>
+          <Search
             id="search"
             name="search"
             placeholder="Type your message..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
           />
-        </form>
-        <div className="style__sidebar--plus">
+        </Form>
+        <div className={styles.plus}>
           <svg
             width="23"
             height="23"
@@ -147,7 +150,7 @@ const index = ({ decoded, selectReceiver }) => {
           </svg>
         </div>
       </div>
-      <div className="style__sidebar--message">
+      <div className={styles.message}>
         {listUser.isLoading ? (
           <BulletList />
         ) : listUser.isError ? (
@@ -157,7 +160,7 @@ const index = ({ decoded, selectReceiver }) => {
             (item, index) =>
               item.user.id !== decoded.id && (
                 <div key={index}>
-                  <MessageCard
+                  <Message
                     avatar={item.user.avatar}
                     username={item.user.name}
                     message={item.message}
