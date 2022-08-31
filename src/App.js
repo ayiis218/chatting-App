@@ -1,12 +1,8 @@
-import React from "react";
-import Route from "./router"
+import React from 'react';
+import Route from './router';
 
 function App() {
-  return (
-    <div className="App">
-      <Route />
-    </div>
-  );
+   return <Route />;
 }
 
 export default App;

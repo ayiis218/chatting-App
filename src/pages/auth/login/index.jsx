@@ -1,13 +1,8 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import FormLogin from "../../../components/organisms/Auth/FormLogin";
-
-import styles from "./styles.module.css";
+import React from 'react';
+import FormLogin from '../../../components/organisms/Auth/FormLogin';
 
 const login = () => {
-    return (
-        <FormLogin />
-    )
-}
+   return <FormLogin />;
+};
 
-export default login
+export default login;
